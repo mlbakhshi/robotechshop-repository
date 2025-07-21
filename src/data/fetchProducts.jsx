@@ -9,7 +9,8 @@ const fetchProducts = async () => {
   
   try {
    
-    const response = await fetch("http://localhost:8080/api/get_products.php");
+    // const response = await fetch("http://localhost:8080/api/get_products.php");
+    const response = await fetch("https://687e1b51c07d1a878c314ec2.mockapi.io/products");
     const data = await response.json();
     const productsArray = data.products;
     console.log("📦 fetchProducts called");
