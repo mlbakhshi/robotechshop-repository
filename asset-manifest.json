@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/robotechshop/static/css/main.112a8b81.css",
-    "main.js": "/robotechshop/static/js/main.2df4048d.js",
-    "static/media/PIR.jpg": "/robotechshop/static/media/PIR.79af4d66d9da7712585a.jpg",
-    "static/media/Yekan.svg": "/robotechshop/static/media/Yekan.16937b200618d8bc2c04.svg",
-    "static/media/Yekan.ttf": "/robotechshop/static/media/Yekan.f6a0838b6690eaaa2898.ttf",
-    "static/media/Yekan.woff": "/robotechshop/static/media/Yekan.18af8c75ab1951a5e56d.woff",
-    "static/media/Infrared.jpg": "/robotechshop/static/media/Infrared.43db7a52b942a5eb13cf.jpg",
-    "index.html": "/robotechshop/index.html",
-    "main.112a8b81.css.map": "/robotechshop/static/css/main.112a8b81.css.map",
-    "main.2df4048d.js.map": "/robotechshop/static/js/main.2df4048d.js.map"
+    "main.css": "/robotechshop-repository/static/css/main.dfc21d91.css",
+    "main.js": "/robotechshop-repository/static/js/main.e161ab71.js",
+    "static/media/PIR.jpg": "/robotechshop-repository/static/media/PIR.79af4d66d9da7712585a.jpg",
+    "static/media/Yekan.svg": "/robotechshop-repository/static/media/Yekan.16937b200618d8bc2c04.svg",
+    "static/media/Yekan.ttf": "/robotechshop-repository/static/media/Yekan.f6a0838b6690eaaa2898.ttf",
+    "static/media/Yekan.woff": "/robotechshop-repository/static/media/Yekan.18af8c75ab1951a5e56d.woff",
+    "static/media/Infrared.jpg": "/robotechshop-repository/static/media/Infrared.43db7a52b942a5eb13cf.jpg",
+    "index.html": "/robotechshop-repository/index.html",
+    "main.dfc21d91.css.map": "/robotechshop-repository/static/css/main.dfc21d91.css.map",
+    "main.e161ab71.js.map": "/robotechshop-repository/static/js/main.e161ab71.js.map"
   },
   "entrypoints": [
-    "static/css/main.112a8b81.css",
-    "static/js/main.2df4048d.js"
+    "static/css/main.dfc21d91.css",
+    "static/js/main.e161ab71.js"
   ]
 }
