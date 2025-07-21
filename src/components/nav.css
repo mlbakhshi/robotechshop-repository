@@ -1,0 +1,10 @@
+.nav-bar-badget{
+   color: white;
+   background-color: red;
+   border-radius: 9px;
+   padding: 0px 3px;
+   vertical-align: top;
+   margin-left: 0;
+   font-size: 12px;
+   justify-content: center;
+}
