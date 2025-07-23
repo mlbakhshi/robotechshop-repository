@@ -23,8 +23,11 @@ const Search = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
+      // const response = await fetch(
+      //   `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
+      // );
       const response = await fetch(
-        `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
+        `/api/check_product.php?ProductName=${values.ProductName}`
       );
       const data = await response.json();
 

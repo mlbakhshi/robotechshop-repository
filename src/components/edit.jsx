@@ -97,9 +97,13 @@ const Edit = ({ productToEdit = null }) => {
         }
 
         // ارسال داده به سرور
-        const response = await fetch("http://localhost:8080/api/save_product.php", {
+        // const response = await fetch("http://localhost:8080/api/save_product.php", {
+        //     method: "POST",
+        //     body: formData,
+        // });
+        const response = await fetch("/api/save_product.php", {
             method: "POST",
-            body: formData, 
+            body: formData,
         });
 
         const result = await response.json();
