@@ -5,8 +5,11 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { ShopContext } from "../context/shopContext";
 import "./nav.css"
+import {getCookie}  from "../utility/cookie";
+
 const Nav=() =>{
    const {cartItems} = useContext(ShopContext);
+   const userId = getCookie("userId");
    const itemCount = cartItems?.reduce((prev , current)=>{
    return prev + current.count
 }, 0)
@@ -19,13 +22,17 @@ const Nav=() =>{
                   <Link to="/" className="nav-link"> فروشگاه </Link>
                </li>
                <li className="nav-item">
-                  <Link to="/cart" className="nav-link"> 
-                  <FontAwesomeIcon icon= {faShoppingCart} />
-                  <span className="nav-bar-badget"> { itemCount } </span>
+                  <Link to="/cart" className="nav-link">
+                     <FontAwesomeIcon icon={faShoppingCart}/>
+                     <span className="nav-bar-badget"> {itemCount} </span>
                   </Link>
                </li>
+               {userId && <li className="nav-item">
+                  <Link to="/search" className="nav-link"> کالای جدید </Link>
+               </li>}
+
                <li className="nav-item">
-                  <Link to="/search" className="nav-link">  کالای جدید </Link>
+                  <Link to="/register" className="nav-link"> ثبت نام </Link>
                </li>
             </ul>
          </div>

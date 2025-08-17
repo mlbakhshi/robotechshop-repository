@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import NumberFormatInput from "../../components/NumberFormatInput";
 
 const ProfitCalculator = ({ checkExistingProduct }) => {
   const { values, setFieldValue } = useFormikContext();
@@ -44,12 +45,12 @@ const List = () => {
 
   const checkExistingProduct = async (productName) => {
     try {
-      // const response = await fetch(
-      //   `http://localhost:8080/api/check_product.php?ProductName=${productName}`
-      // );
       const response = await fetch(
-        `/api/check_product.php?ProductName=${productName}`
+        `http://localhost:8080/api/check_product.php?ProductName=${productName}`
       );
+      // const response = await fetch(
+      //   `/api/check_product.php?ProductName=${productName}`
+      // );
       const data = await response.json();
 
       // console.log("Product Check Response:", data); // برای دیباگ
@@ -69,7 +70,7 @@ const List = () => {
     StorageId: "",
     Category: "",
     Famous: "",
-    BuyCout: 0,
+    BuyCount: 0,
     BuyDate: "",
     BuyPrice: "",
     TwentyProfit: "",
@@ -84,7 +85,7 @@ const List = () => {
     Category: Yup.string().required("لطفا دسته‌بندی را وارد کنید"),
     Famous: Yup.string(),
     Comment: Yup.string(),
-    BuyCout: Yup.number()
+    BuyCount: Yup.number()
       .required("لطفا تعداد خرید را وارد کنید")
       .positive()
       .integer(),
@@ -105,20 +106,20 @@ const List = () => {
         }
       }
 
-      // const response = await fetch(
-      //   "http://localhost:8080/api/save_product.php",
-      //   {
-      //     method: "POST",
-      //     body: formData,
-      //   }
-      // );
-    const response = await fetch(
-            "/api/save_product.php",
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
+      const response = await fetch(
+        "http://localhost:8080/api/save_product.php",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+    // const response = await fetch(
+    //         "/api/save_product.php",
+    //         {
+    //           method: "POST",
+    //           body: formData,
+    //         }
+    //       );
 
       const textResponse = await response.text();
       console.log("Raw response from server:", textResponse);
@@ -183,7 +184,7 @@ const List = () => {
               <div className="d-flex flex-row mb-3">
                 <div className="col-md-3">
                   <label>تعداد خرید</label>
-                  <Field type="text" name="BuyCout" placeholder="تعداد خرید" />
+                  <Field type="text" name="BuyCount" placeholder="تعداد خرید" />
                 </div>
                 <div className="col-md-3">
                   <label>تاریخ خرید</label>
@@ -197,9 +198,12 @@ const List = () => {
               <hr />
 
               <div className="d-flex flex-row mb-3">
+                {
+
+                }
                 <div className="col-md-4">
                   <label>قیمت خرید</label>
-                  <Field type="text" name="BuyPrice" placeholder="قیمت خرید" />
+                  <NumberFormatInput type="text" name="BuyPrice" placeholder="قیمت خرید" />
                 </div>
                 <div className="col-md-4">
                   <label>سود 20 درصد</label>
@@ -231,7 +235,6 @@ const List = () => {
                 <button type="submit">ارسال</button>
               </div>
             </div>
-      {console.log(existingProduct)}
             {existingProduct && (
               <div style={{ border: "1px solid gray", padding: "10px", marginTop: "10px" }}>
                 <h3>⚠️ کالا مشابه پیدا شد:</h3>

@@ -23,12 +23,12 @@ const Search = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      // const response = await fetch(
-      //   `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
-      // );
       const response = await fetch(
-        `/api/check_product.php?ProductName=${values.ProductName}`
+        `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
       );
+      // const response = await fetch(
+      //     `/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
+      // );
       const data = await response.json();
 
       if (data.exists && Array.isArray(data.products) && data.products.length > 0) {
@@ -56,7 +56,7 @@ const Search = () => {
             </h2>
 
             <div className="d-flex flex-row mb-3" style={{ textAlign: "right" }}>
-              <div className="col-md-4">
+              <div className="col-md-8">
                 <label className="m-1">نام کالا</label>
                 <Field type="text" name="ProductName" placeholder="نام کالا" />
               </div>

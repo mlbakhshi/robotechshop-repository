@@ -9,8 +9,8 @@ const fetchProducts = async () => {
   
   try {
    
-    // const response = await fetch("http://localhost:8080/api/get_products.php");
-    const response = await fetch("/api/get_products.php");
+    const response = await fetch("http://localhost:8080/api/get_products.php");
+    // const response = await fetch("/api/get_products.php");
     const data = await response.json();
     const productsArray = data.products;
     console.log("📦 fetchProducts called");
@@ -28,10 +28,11 @@ const fetchProducts = async () => {
     return productsArray.map((product, index) => ({
       id: product.ProductId,
       productName: product.ProductName,
-      image: images[index % images.length], // اختصاص تصویر تصادفی
+      image: product.ProductImg ? product.ProductImg : images[index % images.length],
       buyPrice: product.BuyPrice,
       twentyProfitPrice: product.TwentyProfit,
       salePrice: product.SalePrice,
+      buyCount: product.BuyCount,
     }));
   } catch (error) {
     console.error("خطا در دریافت کالاها:", error);

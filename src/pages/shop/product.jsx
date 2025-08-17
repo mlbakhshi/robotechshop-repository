@@ -1,12 +1,22 @@
+import {getCookie}  from "../../utility/cookie";
 const Product = ({ data }) => {
-    console.log("Product data:", data); // این خط رو اضافه کن
+    const userId = getCookie("userId");
+
+    const formatNumber = (num) => {
+        if (num === null || num === undefined || isNaN(num)) return "";
+        return Math.floor(num).toLocaleString("fa-IR");
+    };
+
     return (
         <div className="product-card">
-            <img src={data.image} alt={data.productName}/>
-            <h3>{data.productName}</h3>
-            <p>قیمت خرید: {Math.floor((data.buyPrice))} تومان</p>
-            <p>قیمت رسمی: {Math.floor(data.twentyProfitPrice)} تومان</p>
-            <p>قیمت فروش: {Math.floor(data.salePrice)} تومان</p>
+            <img src={data.image} alt={data.productName} />
+            <h3 className="mt-3">{data.productName}</h3>
+
+            {/* فقط اگر کوکی وجود داشته باشه */}
+            {userId && <p>قیمت خرید: {formatNumber(data.buyPrice)} تومان</p>}
+            {userId && <p>قیمت رسمی: {formatNumber(data.twentyProfitPrice)} تومان</p>}
+            <p>قیمت فروش: {formatNumber(data.salePrice)} تومان</p>
+            <p>موجودی: {formatNumber(data.buyCount)}</p>
         </div>
     );
 };

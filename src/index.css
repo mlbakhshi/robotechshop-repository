@@ -518,19 +518,23 @@ body{
 }
 .products{
   img{
-    width: 225px !important;
+    width: 50% !important;
   }
   .product-card{
     background-color: #f5f7fb;
     border-radius: 15px;
     margin: auto;
     padding: 10px;
+    h3{
+      font-size: 18px;
+      font-weight: 700;
+    }
   }
 }
 
 .products {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* برای دسکتاپ */
+  grid-template-columns: repeat(5, 1fr); /* برای دسکتاپ */
   grid-gap: 1em;
   padding: 1em;
 }
