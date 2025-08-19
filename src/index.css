@@ -552,3 +552,18 @@ body{
     grid-template-columns: 1fr; /* یک ستون در موبایل */
   }
 }
+.img-product{
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+}
+.edit-product-icon{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+}

@@ -5,11 +5,12 @@ import Cart from './pages/cart/cart';
 import Nav from './components/nav';
 import { ShopContextProvider } from './context/shopContext';
 import Welcom from './components/welcom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import Search from './pages/search/search';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
+import Edit from "./components/edit";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/edit/:id" element={<Edit />} />
           </Routes>
         
         </Router>

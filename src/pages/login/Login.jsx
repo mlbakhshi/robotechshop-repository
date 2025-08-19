@@ -16,7 +16,14 @@ const Login = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
-
+            // const response = await fetch(
+            //     "/api/login.php",
+            //     {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ username, password }),
+            //     }
+            // );
             const result = await response.json();
             console.log("Login result:", result);
 
@@ -54,7 +61,7 @@ const Login = () => {
                     />
                 </div>
                 <div style={{ marginBottom: "10px" }}>
-                    <label>رمز dgfعبور:</label>
+                    <label>رمز عبور:</label>
                     <input
                         type="password"
                         value={password}

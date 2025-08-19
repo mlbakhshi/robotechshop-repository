@@ -21,6 +21,17 @@ const Register = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
+
+            // const res = await fetch(
+            //     "/api/register.php",
+            //     {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ username, password }),
+            //     }
+            // );
+
+
             const data = await res.json();
             if (data.success) {
                 setMessage("ثبت نام موفق! لطفاً برای ورود منتظر بمانید...");
@@ -47,6 +58,16 @@ const Register = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
             });
+
+            // const res = await fetch(
+            //     "/api/login.php",
+            //     {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ username, password }),
+            //     }
+            // );
+
             const data = await res.json();
             if (data.success) {
                 // ست کردن کوکی به مدت 30 روز
@@ -83,8 +104,8 @@ const Register = () => {
                 style={{ width: "100%", marginBottom: 10 }}
             />
             <div style={{ marginBottom: 10 }}>
-                <button onClick={handleRegister} style={{ marginRight: 10 }}>ثبت نام</button>
-                <button onClick={handleLogin}>ورود</button>
+                <button onClick={handleRegister} className="btn btn-warning btn-lg ml-3" style={{ marginRight: 10 }}>ثبت نام</button>
+                <button onClick={handleLogin} className="btn btn-success btn-lg">ورود</button>
             </div>
             {message && <p style={{ marginTop: 20 }}>{message}</p>}
         </div>

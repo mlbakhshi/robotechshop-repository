@@ -26,7 +26,7 @@ const fetchProducts = async () => {
 
     // پردازش داده‌ها
     return productsArray.map((product, index) => ({
-      id: product.ProductId,
+      id: product.id,
       productName: product.ProductName,
       image: product.ProductImg ? product.ProductImg : images[index % images.length],
       buyPrice: product.BuyPrice,
