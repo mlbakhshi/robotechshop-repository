@@ -9,8 +9,8 @@ const fetchProducts = async () => {
   
   try {
    
-    const response = await fetch("http://localhost:8080/api/get_products.php");
-    // const response = await fetch("/api/get_products.php");
+    // const response = await fetch("http://localhost:8080/api/get_products.php");
+    const response = await fetch("/api/get_products.php");
     const data = await response.json();
     const productsArray = data.products;
     console.log("📦 fetchProducts called");

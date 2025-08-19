@@ -45,12 +45,12 @@ const List = () => {
 
   const checkExistingProduct = async (productName) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/check_product.php?ProductName=${productName}`
-      );
       // const response = await fetch(
-      //   `/api/check_product.php?ProductName=${productName}`
+      //   `http://localhost:8080/api/check_product.php?ProductName=${productName}`
       // );
+      const response = await fetch(
+        `/api/check_product.php?ProductName=${productName}`
+      );
       const data = await response.json();
 
       // console.log("Product Check Response:", data); // برای دیباگ
@@ -106,20 +106,20 @@ const List = () => {
         }
       }
 
-      const response = await fetch(
-        "http://localhost:8080/api/save_product.php",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-    // const response = await fetch(
-    //         "/api/save_product.php",
-    //         {
-    //           method: "POST",
-    //           body: formData,
-    //         }
-    //       );
+      // const response = await fetch(
+      //   "http://localhost:8080/api/save_product.php",
+      //   {
+      //     method: "POST",
+      //     body: formData,
+      //   }
+      // );
+    const response = await fetch(
+            "/api/save_product.php",
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
 
       const textResponse = await response.text();
       console.log("Raw response from server:", textResponse);

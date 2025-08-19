@@ -11,19 +11,19 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/api/login.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
-            });
-            // const response = await fetch(
-            //     "/api/login.php",
-            //     {
-            //         method: "POST",
-            //         headers: { "Content-Type": "application/json" },
-            //         body: JSON.stringify({ username, password }),
-            //     }
-            // );
+            // const response = await fetch("http://localhost:8080/api/login.php", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ username, password }),
+            // });
+            const response = await fetch(
+                "/api/login.php",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password }),
+                }
+            );
             const result = await response.json();
             console.log("Login result:", result);
 

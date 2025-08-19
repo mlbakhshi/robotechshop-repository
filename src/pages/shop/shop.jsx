@@ -35,11 +35,21 @@ const Shop = () => {
 
         // ارسال به سرور
         try {
-            const response = await fetch("http://localhost:8080/api/increase_stock.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: productId, increment: 1 }),
-            })
+            // const response = await fetch("http://localhost:8080/api/increase_stock.php", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ id: productId, increment: 1 }),
+            // })
+
+            const response = await fetch(
+                "/api/increase_stock.php",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id: productId, increment: 1 }),
+                }
+            );
+
             const data = await response.json();
             if (!data.success) {
                 alert("خطا در ذخیره موجودی در سرور");
@@ -61,11 +71,19 @@ const Shop = () => {
 
         // ارسال به سرور
         try {
-            const response = await fetch("http://localhost:8080/api/decrease_stock.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: productId, decrement: 1 }),
-            })
+            // const response = await fetch("http://localhost:8080/api/decrease_stock.php", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify({ id: productId, decrement: 1 }),
+            // })
+            const response = await fetch(
+                "/api/decrease_stock.php",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id: productId, decrement: 1 }),
+                }
+            );
             const data = await response.json();
             if (!data.success) {
                 alert("خطا در ذخیره موجودی در سرور");
