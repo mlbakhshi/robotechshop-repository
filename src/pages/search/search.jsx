@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import Edit from "../../components/edit";
+import {useGlobal} from "../../context/GlobalContext";
 
 const Search = () => {
   const [existingProduct, setExistingProduct] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
-
+  const { globalValue, setGlobalValue } = useGlobal();
   const initialValues = {
     ProductName: "",
   };
@@ -27,7 +28,8 @@ const Search = () => {
       //   `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
       // );
       const response = await fetch(
-          `/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
+          // `/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
+          `${globalValue}/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
       );
       const data = await response.json();
 

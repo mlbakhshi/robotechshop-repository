@@ -5,6 +5,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import NumberFormatInput from "./NumberFormatInput";
+import {useGlobal} from "../context/GlobalContext";
 
 
 const ProfitCalculator = () => {
@@ -40,7 +41,7 @@ const DatePickerField = ({ field, form }) => {
 };
 
 const Edit = ({ productToEdit = null }) => {
-  
+    const { globalValue, setGlobalValue } = useGlobal();
   const isEditing = Boolean(productToEdit); // ✅ تشخیص حالت ویرایش یا افزودن محصول جدید
 
   const initialValues = productToEdit || {
@@ -101,7 +102,10 @@ const Edit = ({ productToEdit = null }) => {
         //     method: "POST",
         //     body: formData,
         // });
-        const response = await fetch("/api/save_product.php", {
+        const response = await fetch(
+            // "/api/save_product.php",
+            `${globalValue}/api/save_product.php`,
+            {
             method: "POST",
             body: formData,
         });
@@ -170,7 +174,7 @@ const Edit = ({ productToEdit = null }) => {
                 <div className="d-flex flex-row mb-3 mt-5 row" style={{textAlign: "right"}}>
                     <div className="col-md-4 col-xs-12 mt-3">
                         <label className="ml-2">قیمت خرید</label>
-                        <NumberFormatInput type="text" name="BuyPrice" placeholder="قیمت خرید" />
+                        <NumberFormatInput type="text" name="BuyPrice" placeholder="قیمت خرید"/>
                     </div>
                     <div className="col-md-4 col-xs-12 mt-3">
                         <label className="ml-2">سود 20 درصد</label>
@@ -178,22 +182,20 @@ const Edit = ({ productToEdit = null }) => {
                     </div>
                     <div className="col-md-4 col-xs-12 mt-3">
                         <label className="ml-2">قیمت فروش</label>
-                        <NumberFormatInput type="text" name="SalePrice" placeholder="قیمت فروش" />
+                        <NumberFormatInput type="text" name="SalePrice" placeholder="قیمت فروش"/>
                     </div>
                 </div>
-
                 <input
                     name="ProductImg"
                     type="file"
                     accept="image/*"
-                    capture="environment" // یا "user"
                     onChange={(event) => {
                         const file = event.currentTarget.files[0];
                         setFieldValue("ProductImg", file);
                     }}
                 />
 
-                <div className="mt-3">
+                <div className="mt-3 mb-3">
                     <button type="submit">{isEditing ? "ویرایش کالا" : "افزودن کالای جدید"}</button>
                 </div>
             </div>

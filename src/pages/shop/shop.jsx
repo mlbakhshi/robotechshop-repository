@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import fetchProducts from "../../data/fetchProducts";
 import Product from "./product";
+import {useGlobal} from "../../context/GlobalContext";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
-
+    const { globalValue, setGlobalValue } = useGlobal();
     useEffect(() => {
-        fetchProducts().then((data) => {
+        fetchProducts(globalValue).then((data) => {
             setProducts(data);
             setFilteredProducts(data);
         });
-    }, []);
+    }, [globalValue]);
 
     // وقتی متن سرچ تغییر کرد، فیلتر کن
     const handleSearch = () => {
@@ -42,7 +43,7 @@ const Shop = () => {
             // })
 
             const response = await fetch(
-                "/api/increase_stock.php",
+                `${globalValue}/api/increase_stock.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -77,7 +78,7 @@ const Shop = () => {
             //     body: JSON.stringify({ id: productId, decrement: 1 }),
             // })
             const response = await fetch(
-                "/api/decrease_stock.php",
+                `${globalValue}/api/decrease_stock.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

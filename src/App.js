@@ -11,11 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
 import Edit from "./components/edit";
+import {GlobalProvider} from "./context/GlobalContext";
 
 function App() {
   return (
     <div className="App">
     <ShopContextProvider>
+    <GlobalProvider>
         <Router>
           
           <Nav />
@@ -30,6 +32,7 @@ function App() {
           </Routes>
         
         </Router>
+    </GlobalProvider>
         </ShopContextProvider>
     </div>
   );

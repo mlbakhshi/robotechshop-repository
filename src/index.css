@@ -542,14 +542,14 @@ body{
 /* تبلت */
 @media (max-width: 992px) {
   .products {
-    grid-template-columns: repeat(2, 1fr); /* دو ستون در تبلت */
+    grid-template-columns: repeat(3, 1fr); /* دو ستون در تبلت */
   }
 }
 
 /* موبایل */
 @media (max-width: 576px) {
   .products {
-    grid-template-columns: 1fr; /* یک ستون در موبایل */
+    grid-template-columns: repeat(2, 1fr); /* یک ستون در موبایل */
   }
 }
 .img-product{

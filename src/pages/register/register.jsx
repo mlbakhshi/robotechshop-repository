@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {useGlobal} from "../../context/GlobalContext";
 
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const { globalValue, setGlobalValue } = useGlobal();
     const navigate = useNavigate();
 
     // ثبت نام
@@ -23,7 +25,8 @@ const Register = () => {
             // });
 
             const res = await fetch(
-                "/api/register.php",
+                // "/api/register.php",
+                `${globalValue}/api/register.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -60,7 +63,8 @@ const Register = () => {
             // });
 
             const res = await fetch(
-                "/api/login.php",
+                // "/api/login.php",
+                `${globalValue}/api/login.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

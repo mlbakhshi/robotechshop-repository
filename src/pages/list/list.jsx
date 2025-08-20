@@ -5,6 +5,7 @@ import DatePicker from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import NumberFormatInput from "../../components/NumberFormatInput";
+import {useGlobal} from "../../context/GlobalContext";
 
 const ProfitCalculator = ({ checkExistingProduct }) => {
   const { values, setFieldValue } = useFormikContext();
@@ -42,14 +43,15 @@ const DatePickerField = ({ field, form }) => {
 
 const List = () => {
   const [existingProduct, setExistingProduct] = useState(null);
-
+  const { globalValue, setGlobalValue } = useGlobal();
   const checkExistingProduct = async (productName) => {
     try {
       // const response = await fetch(
       //   `http://localhost:8080/api/check_product.php?ProductName=${productName}`
       // );
       const response = await fetch(
-        `/api/check_product.php?ProductName=${productName}`
+        // `/api/check_product.php?ProductName=${productName}`
+        `${globalValue}/api/check_product.php?ProductName=${productName}`
       );
       const data = await response.json();
 
@@ -114,7 +116,8 @@ const List = () => {
       //   }
       // );
     const response = await fetch(
-            "/api/save_product.php",
+            // "/api/save_product.php",
+        `${globalValue}/api/save_product.php`,
             {
               method: "POST",
               body: formData,

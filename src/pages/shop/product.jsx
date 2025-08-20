@@ -17,9 +17,9 @@ const Product = ({ data, onIncrease, onDecrease }) => {
             </div>
 
             <h3 className="mt-3">{data.productName}</h3>
-            {userId && <p>قیمت خرید: {formatNumber(data.buyPrice)} تومان</p>}
-            {userId && <p>قیمت رسمی: {formatNumber(data.twentyProfitPrice)} تومان</p>}
-            <p>قیمت فروش: {formatNumber(data.salePrice)} تومان</p>
+            {userId && <p>قیمت خرید: {formatNumber(data.buyPrice)} ت</p>}
+            {userId && <p>قیمت رسمی: {formatNumber(data.twentyProfitPrice)} ت</p>}
+            <p>قیمت فروش: {formatNumber(data.salePrice)}ت</p>
             <p style={{display: "flex", alignItems: "center", gap: "10px",justifyContent:"center"}}>
                 {userId && (
                         <button
@@ -67,6 +67,7 @@ const Product = ({ data, onIncrease, onDecrease }) => {
                             </button>
                         ))}
             </p>
+            {userId && <p>مکان: {data.StorageId.replace(/%/g, '')}</p>}
         </div>
     )
         ;

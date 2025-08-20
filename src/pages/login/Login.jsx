@@ -1,10 +1,13 @@
 // LoginPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {useGlobal} from "../../context/GlobalContext";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { globalValue, setGlobalValue } = useGlobal();
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -17,7 +20,8 @@ const Login = () => {
             //     body: JSON.stringify({ username, password }),
             // });
             const response = await fetch(
-                "/api/login.php",
+                // "/api/login.php",
+                `${globalValue}/api/login.php`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

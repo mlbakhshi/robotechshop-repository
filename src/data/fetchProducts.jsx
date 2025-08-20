@@ -5,26 +5,21 @@ import infrared from "../assets/Infrared.jpg";
 import PIR from "../assets/PIR.jpg";
 import touch from "../assets/touch.jpg";
 
-const fetchProducts = async () => {
-  
+// حالا globalValue به عنوان پارامتر گرفته می‌شود
+const fetchProducts = async (globalValue) => {
   try {
-   
-    // const response = await fetch("http://localhost:8080/api/get_products.php");
-    const response = await fetch("/api/get_products.php");
+    const response = await fetch(`${globalValue}/api/get_products.php`);
     const data = await response.json();
     const productsArray = data.products;
     console.log("📦 fetchProducts called");
 
-    // چک کردن اینکه داده‌های API به‌صورت آرایه دریافت شده‌اند
     if (!Array.isArray(productsArray)) {
       console.error("خطا: داده‌های دریافت‌شده آرایه نیستند!", data);
       return [];
     }
 
-    // لیست تصاویر برای تخصیص تصادفی
     const images = [sevensegment, cheragh, dorbin, infrared, PIR, touch];
 
-    // پردازش داده‌ها
     return productsArray.map((product, index) => ({
       id: product.id,
       productName: product.ProductName,
@@ -33,6 +28,7 @@ const fetchProducts = async () => {
       twentyProfitPrice: product.TwentyProfit,
       salePrice: product.SalePrice,
       buyCount: product.BuyCount,
+      StorageId: product.StorageId,
     }));
   } catch (error) {
     console.error("خطا در دریافت کالاها:", error);
@@ -40,5 +36,4 @@ const fetchProducts = async () => {
   }
 };
 
-// به‌جای `PRODUCTS`، این تابع را `export` کنید
 export default fetchProducts;
