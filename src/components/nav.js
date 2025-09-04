@@ -27,43 +27,43 @@ const Nav = () => {
    };
 
    return (
-       <div className="navbar navbar-dark bg-dark navbar-expand-lg">
+       <div className="navbar navbar-dark navbar-expand-lg"  style={{  backgroundImage: `url(images/robotec-01.svg)`,backgroundRepeat:"no-repeat",backgroundSize:"cover",height:"200px" }}>
           <div className="container">
              <a className="navbar-brand">فروشگاه روبوتک</a>
              <ul className="navbar-nav">
-                <li className="nav-item">
-                   <Link to="/" className="nav-link">
+                <li className="nav-item" >
+                   <Link to="/" className="nav-link" style={{color:"black"}}>
                       فروشگاه
                    </Link>
                 </li>
-                <li className="nav-item">
-                   <Link to="/cart" className="nav-link">
+                <li className="nav-item" >
+                   <Link to="/cart" className="nav-link" style={{color:"black"}}>
                       <FontAwesomeIcon icon={faShoppingCart} />
                       <span className="nav-bar-badget"> {itemCount} </span>
                    </Link>
                 </li>
 
                 {userId && (
-                    <li className="nav-item">
-                       <Link to="/search" className="nav-link">
+                    <li className="nav-item" >
+                       <Link to="/search" className="nav-link" style={{color:"black"}}>
                           کالای جدید
                        </Link>
                     </li>
                 )}
 
                 {!userId && (
-                    <li className="nav-item">
-                       <Link to="/register" className="nav-link">
+                    <li className="nav-item" >
+                       <Link to="/register" className="nav-link" style={{color:"black"}}>
                           ثبت نام/ورود
                        </Link>
                     </li>
                 )}
 
                 {userId && (
-                    <li className="nav-item">
+                    <li className="nav-item" >
                        <button
                            className="nav-link btn btn-link"
-                           style={{ color: "white", textDecoration: "none" }}
+                           style={{ color: "black", textDecoration: "none" }}
                            onClick={() => setShowLogoutModal(true)}
                        >
                           خروج

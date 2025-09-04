@@ -18,21 +18,21 @@ const Register = () => {
         }
 
         try {
-            // const res = await fetch("http://localhost:8080/api/register.php", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ username, password }),
-            // });
+            const res = await fetch("http://localhost:8080/api/register.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
 
-            const res = await fetch(
-                // "/api/register.php",
-                `${globalValue}/api/register.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, password }),
-                }
-            );
+            // const res = await fetch(
+            //     // "/api/register.php",
+            //     `${globalValue}/api/register.php`,
+            //     {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ username, password }),
+            //     }
+            // );
 
 
             const data = await res.json();
@@ -56,21 +56,21 @@ const Register = () => {
         }
 
         try {
-            // const res = await fetch("http://localhost:8080/api/login.php", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({ username, password }),
-            // });
+            const res = await fetch("http://localhost:8080/api/login.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
 
-            const res = await fetch(
-                // "/api/login.php",
-                `${globalValue}/api/login.php`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, password }),
-                }
-            );
+            // const res = await fetch(
+            //     // "/api/login.php",
+            //     `${globalValue}/api/login.php`,
+            //     {
+            //         method: "POST",
+            //         headers: { "Content-Type": "application/json" },
+            //         body: JSON.stringify({ username, password }),
+            //     }
+            // );
 
             const data = await res.json();
             if (data.success) {

@@ -11,15 +11,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/login/Login";
 import Register from "./pages/register/register";
 import Edit from "./components/edit";
-import {GlobalProvider} from "./context/GlobalContext";
+import {GlobalProvider,} from "./context/GlobalContext";
+import CategoryProducts from "./pages/category/CategoryProducts";
+
 
 function App() {
+
   return (
     <div className="App">
     <ShopContextProvider>
     <GlobalProvider>
         <Router>
-          
+
           <Nav />
           <Welcom />
           <Routes>
@@ -29,8 +32,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/edit/:id" element={<Edit />} />
+            <Route
+                path="/category/:categoryId"
+                element={<CategoryProducts />}
+            />
           </Routes>
-        
+
         </Router>
     </GlobalProvider>
         </ShopContextProvider>

@@ -567,3 +567,44 @@ body{
   border-radius: 50%;
   padding: 5px;
 }
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: white;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* لایه مات روی تصویر */
+  backdrop-filter: blur(3px);      /* مات کردن بک‌گراند */
+}
+
+.category-card span {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
