@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 import Shop from './pages/shop/shop';
 import Cart from './pages/cart/cart';
@@ -13,9 +13,21 @@ import Register from "./pages/register/register";
 import Edit from "./components/edit";
 import {GlobalProvider,} from "./context/GlobalContext";
 import CategoryProducts from "./pages/category/CategoryProducts";
+import {useDeviceType} from "./hook/useDeviceType";
+import {useEffect} from "react";
 
 
 function App() {
+
+  const device = useDeviceType();
+
+  useEffect(() => {
+    if (device === "mobile") {
+      import("./theme.css");
+    } else {
+      import("./index.css");
+    }
+  }, [device]);
 
   return (
     <div className="App">
@@ -26,7 +38,8 @@ function App() {
           <Nav />
           <Welcom />
           <Routes>
-            <Route path="/" element={<Shop />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/" element={<Navigate to="/shop" />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
