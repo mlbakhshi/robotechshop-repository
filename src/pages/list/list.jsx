@@ -48,11 +48,9 @@ const List = () => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/check_product.php?ProductName=${productName}`
+            // `${globalValue}/api/check_product.php?ProductName=${productName}`
       );
-      // const response = await fetch(
-      //   // `/api/check_product.php?ProductName=${productName}`
-      //   `${globalValue}/api/check_product.php?ProductName=${productName}`
-      // );
+
       const data = await response.json();
 
       // console.log("Product Check Response:", data); // برای دیباگ
@@ -71,13 +69,10 @@ const List = () => {
     ProductName: "",
     StorageId: "",
     Category: "",
-    Famous: "",
     BuyCount: 0,
-    BuyDate: "",
     BuyPrice: "",
     TwentyProfit: "",
     SalePrice: "",
-    Comment: "",
     ProductImg: null,
   };
 
@@ -85,13 +80,10 @@ const List = () => {
     ProductName: Yup.string().required("لطفا نام کالا را وارد کنید"),
     StorageId: Yup.string(),
     Category: Yup.string().required("لطفا دسته‌بندی را وارد کنید"),
-    Famous: Yup.string(),
-    Comment: Yup.string(),
     BuyCount: Yup.number()
       .required("لطفا تعداد خرید را وارد کنید")
       .positive()
       .integer(),
-    BuyDate: Yup.string().required("لطفا تاریخ خرید را وارد کنید"),
     BuyPrice: Yup.string().required("لطفا قیمت خرید را وارد کنید"),
     TwentyProfit: Yup.string().required("لطفا سود ۲۰ درصد را وارد کنید"),
     SalePrice: Yup.string().required("لطفا قیمت فروش را وارد کنید"),
@@ -110,19 +102,12 @@ const List = () => {
 
       const response = await fetch(
         "http://localhost:8080/api/save_product.php",
+          // `${globalValue}/api/save_product.php`,
         {
           method: "POST",
           body: formData,
         }
       );
-    // const response = await fetch(
-    //         // "/api/save_product.php",
-    //     `${globalValue}/api/save_product.php`,
-    //         {
-    //           method: "POST",
-    //           body: formData,
-    //         }
-    //       );
 
       const textResponse = await response.text();
       console.log("Raw response from server:", textResponse);
@@ -189,10 +174,7 @@ const List = () => {
                   <label>تعداد خرید</label>
                   <Field type="text" name="BuyCount" placeholder="تعداد خرید" />
                 </div>
-                <div className="col-md-3">
-                  <label>تاریخ خرید</label>
-                  <Field name="BuyDate" component={DatePickerField} />
-                </div>
+
               </div>
 
               <hr />

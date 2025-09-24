@@ -4,7 +4,6 @@ import Shop from './pages/shop/shop';
 import Cart from './pages/cart/cart';
 import Nav from './components/nav';
 import { ShopContextProvider } from './context/shopContext';
-import Welcom from './components/welcom';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Search from './pages/search/search';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,6 +14,7 @@ import {GlobalProvider,} from "./context/GlobalContext";
 import CategoryProducts from "./pages/category/CategoryProducts";
 import {useDeviceType} from "./hook/useDeviceType";
 import {useEffect} from "react";
+import ProductDetail from "./pages/product/ProductDetail";
 
 
 function App() {
@@ -36,7 +36,6 @@ function App() {
         <Router>
 
           <Nav />
-          <Welcom />
           <Routes>
             <Route path="/shop" element={<Shop />} />
             <Route path="/" element={<Navigate to="/shop" />} />
@@ -45,10 +44,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/edit/:id" element={<Edit />} />
-            <Route
-                path="/category/:categoryId"
-                element={<CategoryProducts />}
-            />
+            <Route path="/category/:categoryId" element={<CategoryProducts />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
 
         </Router>

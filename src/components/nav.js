@@ -95,10 +95,72 @@ const Nav = () => {
                 </div>
             }
 
+            {device === "mobile" &&
+                <div className="header-menu" style={{}}>
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link" style={{color: "black"}}>
+                                    <i className="fa fa-home"></i>
+                                    <p>
+                                        خانه
+                                    </p>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/cart" className="nav-link" style={{color: "black"}}>
+                                    <FontAwesomeIcon icon={faShoppingCart}/>
+                                    <span className="nav-bar-badget"> {itemCount} </span>
+                                    <p>
+                                        سبد خرید
+                                    </p>
+                                </Link>
+                            </li>
+                            {userId && (
+                                <li className="nav-item">
+                                    <Link to="/search" className="nav-link" style={{color: "black"}}>
+                                        <i className="fa fa-plus-square"></i>
+                                        <p>
+                                            کالای جدید
+                                        </p>
+                                    </Link>
+                                </li>
+                            )}
+                            {!userId && (
+                                <li className="nav-item">
+                                    <Link to="/register" className="nav-link" style={{color: "black"}}>
+                                        <i className="fa fa-sign-in"></i>
+                                        <p>
+                                            ثبت نام/ورود
+                                        </p>
 
-            {showLogoutModal && (
-                <Logout
-                    message="آیا مطمئن هستید که می‌خواهید خارج شوید؟"
+                                    </Link>
+                                </li>
+                            )}
+                            {userId && (
+                                <li className="nav-item">
+                                <button
+                                        className="nav-link btn btn-link"
+                                        style={{color: "black", textDecoration: "none"}}
+                                        onClick={() => setShowLogoutModal(true)}
+                                    >
+                                        <i className="fa fa-sign-out"></i>
+                                        <p>
+                                            خروج
+                                        </p>
+
+
+                                </button>
+                                </li>
+                                )}
+                        </ul>
+                </div>
+            }
+
+
+{
+    showLogoutModal && (
+        <Logout
+            message="آیا مطمئن هستید که می‌خواهید خارج شوید؟"
                     onConfirm={handleLogout}
                     onCancel={() => setShowLogoutModal(false)}
                 />

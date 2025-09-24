@@ -518,10 +518,14 @@ body{
 }
 .products{
   img{
-    width: 50% !important;
+    width: 140px !important;
+    height: 135px;
   }
   .product-card{
-    background-color: #f5f7fb;
+    height: 400px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid #d3d6dc;
     border-radius: 15px;
     margin: auto;
     padding: 10px;
@@ -534,7 +538,7 @@ body{
 
 .products {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* برای دسکتاپ */
+  grid-template-columns: repeat(6, 1fr); /* برای دسکتاپ */
   grid-gap: 1em;
   padding: 1em;
 }
@@ -636,4 +640,12 @@ body{
       border-color: unset;
     }
   }
+}
+
+.edit-position{
+  margin-top: 10px;
+  position: relative;
+  top: -387px;
+  right: 1px;
+  width: 42px;
 }

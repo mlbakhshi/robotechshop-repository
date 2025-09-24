@@ -26,11 +26,9 @@ const Search = () => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/check_product.php?ProductName=${values.ProductName}`
+            // `${globalValue}/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
       );
-      // const response = await fetch(
-      //     // `/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
-      //     `${globalValue}/api/check_product.php?ProductName=${encodeURIComponent(values.ProductName)}`
-      // );
+
       const data = await response.json();
 
       if (data.exists && Array.isArray(data.products) && data.products.length > 0) {
@@ -75,37 +73,48 @@ const Search = () => {
 
       {/* 🔹 نمایش محصولات مشابه */}
       {existingProduct && existingProduct.length > 0 && !showEditForm && (
-        <div style={{ border: "1px solid gray", padding: "10px", marginTop: "10px" }}>
-          <h3>
-            {existingProduct.length} کالای مشابه پیدا شد. اگر قصد ویرایش دارید،
-            یکی را انتخاب کنید. در غیر این‌صورت روی دکمه "کالای جدید" کلیک کنید.
-          </h3>
-          {existingProduct.map((product, index) => (
-            <div key={index} style={{ marginBottom: "10px", padding: "5px", borderBottom: "1px solid lightgray" }}>
-              <p>
-                <strong>نام کالا:</strong> {product.ProductName}
-              </p>
-              <p>
-                <strong>دسته‌بندی:</strong> {product.Category}
-              </p>
-              <button type="button" onClick={() => handleEditClick(product)}>
-                ویرایش
+          <div style={{border: "1px solid gray", padding: "10px", marginTop: "10px"}}>
+            <h3>
+              {existingProduct.length} کالای مشابه پیدا شد. اگر قصد ویرایش دارید،
+              یکی را انتخاب کنید. در غیر این‌صورت روی دکمه "کالای جدید" کلیک کنید.
+            </h3>
+            {existingProduct.map((product, index) => (
+                <>
+                  <div key={index} style={{marginBottom: "10px", padding: "5px", borderBottom: "1px solid lightgray"}}>
+                    <p>
+                      <strong>نام کالا:</strong> {product.ProductName}
+                    </p>
+                    <p>
+                      <strong>دسته‌بندی:</strong> {product.Category}
+                    </p>
+                    <button type="button" onClick={() => handleEditClick(product)}>
+                      ویرایش
+                    </button>
+                  </div>
+
+                </>
+            ))}
+            <div>
+              <button type="button" onClick={() => {
+                setSelectedProduct(null);  // محصولی انتخاب نشده => یعنی محصول جدید
+                setShowEditForm(true);     // فرم باز بشه
+              }}>
+                کالای جدید
               </button>
             </div>
-          ))}
-        </div>
+          </div>
       )}
 
       {/* 🔹 نمایش فرم ویرایش بیرون از `Formik` */}
       {showEditForm && (
-  <>
-    {selectedProduct ? (
-      <Edit productToEdit={selectedProduct} />
-    ) : (
-      <Edit />
-    )}
-  </>
-)}
+          <>
+            {selectedProduct ? (
+                <Edit productToEdit={selectedProduct}/>
+            ) : (
+                <Edit/>
+            )}
+          </>
+      )}
     </>
   );
 };

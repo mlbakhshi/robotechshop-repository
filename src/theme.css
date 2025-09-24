@@ -493,6 +493,10 @@ body{
   }
 }
 
+
+.HeightForm{
+  min-height:714px ;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -518,11 +522,14 @@ body{
 }
 .products{
   img{
-    width: 50% !important;
+    /*width: 50% !important;*/
   }
   .product-card{
-    background-color: #f5f7fb;
+    height: 400px;
+    border: 1px solid #d3d6dc;
     border-radius: 15px;
+    text-decoration: none;
+    color: black;
     margin: auto;
     padding: 10px;
     h3{
@@ -621,6 +628,26 @@ body{
   }
   .header-menu{
     margin-right: auto;
+    position:fixed;
+    bottom:0;
+    z-index: 100;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    .navbar-nav{
+      flex-direction: row !important;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: auto;
+      margin-bottom: auto;
+      .nav-item{
+        .nav-link{
+          font-size: 16px;
+        }
+      }
+    }
+
   }
   .nav-search{
     margin: 1rem;
@@ -637,4 +664,12 @@ body{
       border-color: unset;
     }
   }
+}
+
+.edit-position{
+  margin-top: 10px;
+  position: relative;
+  top: -390px;
+  left: -263px;
+  width: 42px;
 }
