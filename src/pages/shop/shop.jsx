@@ -5,22 +5,20 @@ import { useGlobal } from "../../context/GlobalContext";
 import fetchCategories from "../../data/fetchCategories";
 import { Link, useLocation } from "react-router-dom";
 import Edit from "../../components/edit";
-
+import { useProducts } from "../../context/ProductContext";
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const { products, setProducts, editingProduct, openEdit, handleClose, handleSaved, handleIncreaseStock, handleDecreaseStock } = useProducts();
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const { globalValue } = useGlobal();
     const location = useLocation();
-    const [editingProduct, setEditingProduct] = useState(null);
+    // const [editingProduct, setEditingProduct] = useState(null);
 
     // دریافت محصولات
     useEffect(() => {
-        fetchProducts(globalValue).then((data) => {
-            setProducts(data);
-        });
-    }, [globalValue]);
+        fetchProducts(globalValue).then(data => setProducts(data));
+    }, [globalValue, setProducts]);
 
     // دریافت دسته‌بندی‌ها
     useEffect(() => {
@@ -32,7 +30,6 @@ const Shop = () => {
         const searchParams = new URLSearchParams(location.search);
         const searchTerm = searchParams.get("search")?.toLowerCase() || "";
 
-        console.log("SearchTerm:", searchTerm);
         if (!searchTerm) {
             setFilteredProducts(products);
         } else {
@@ -42,79 +39,6 @@ const Shop = () => {
         }
     }, [location.search, products]);
 
-    const mapProductToFormValues = (p) => ({
-        ProductName: p.productName || p.ProductName || "",
-        StorageId: p.StorageId || "",
-        Category: p.Category || "",
-        Famous: p.Famous || "",
-        BuyCount: p.buyCount ?? p.BuyCount ?? 0,
-        BuyPrice: p.buyPrice ?? p.BuyPrice ?? "",
-        TwentyProfit: p.twentyProfitPrice ?? p.TwentyProfit ?? "",
-        SalePrice: p.salePrice ?? p.SalePrice ?? "",
-        ProductImg: null,
-        id: p.id ?? p.ProductId ?? null, // در صورت نیاز id اصلی
-    });
-
-
-    const openEdit = (product) => {
-        setEditingProduct(mapProductToFormValues(product));
-    };
-
-    const handleClose = () => setEditingProduct(null);
-
-
-    // وقتی محصول ذخیره شد (سرور می‌تونه پاسخ بدن)، لیست رو آپدیت کن
-    const handleSaved = async () => {
-        // مدال رو ببند
-        setEditingProduct(null);
-
-        // دوباره از سرور محصولات رو بخون
-        const updated = await fetchProducts(globalValue);
-        setProducts(updated);
-    };
-    const handleIncreaseStock = async (productId) => {
-        setProducts(prev => prev.map(p => p.id === productId ? { ...p, buyCount: p.buyCount + 1 } : p));
-        setFilteredProducts(prev => prev.map(p => p.id === productId ? { ...p, buyCount: p.buyCount + 1 } : p));
-
-        try {
-            const response = await fetch(
-                "http://localhost:8080/api/increase_stock.php",
-                // `api/increase_stock.php`,
-                {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: productId, increment: 1 }),
-            });
-
-            const data = await response.json();
-            if (!data.success) alert("خطا در ذخیره موجودی در سرور");
-        } catch (error) {
-            console.error(error);
-            alert("ارتباط با سرور برقرار نشد");
-        }
-    };
-
-    const handleDecreaseStock = async (productId) => {
-        setProducts(prev => prev.map(p => p.id === productId ? { ...p, buyCount: p.buyCount - 1 } : p));
-        setFilteredProducts(prev => prev.map(p => p.id === productId ? { ...p, buyCount: p.buyCount - 1 } : p));
-
-        try {
-            const response = await fetch(
-            "http://localhost:8080/api/decrease_stock.php",
-            // `api/decrease_stock.php`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: productId, decrement: 1 }),
-            });
-
-            const data = await response.json();
-            if (!data.success) alert("خطا در ذخیره موجودی در سرور");
-        } catch (error) {
-            console.error(error);
-            alert("ارتباط با سرور برقرار نشد");
-        }
-    };
 
     const categoryImages = {
         1: "images/module.webp",
@@ -126,7 +50,7 @@ const Shop = () => {
     };
 
     return (
-        <div>
+        <div className="common-box">
             <div className="categories-grid mt-3">
                 {categories.length > 0 ? (
                     categories.map(cat => (
@@ -153,45 +77,45 @@ const Shop = () => {
                             data={product}
                             onIncrease={() => handleIncreaseStock(product.id)}
                             onDecrease={() => handleDecreaseStock(product.id)}
-                            onEdit={() => openEdit(product)}
+                            onEdit={() => openEdit(product, { refetch: async () => await fetchProducts(globalValue) })}
                         />
                     ))
                 ) : (
                     <p>هیچ کالایی یافت نشد.</p>
                 )}
 
-                {editingProduct && (
-                    // یک modal ساده
-                    <div
-                        style={{
-                            position: "fixed",
-                            inset: 0,
-                            background: "rgba(0,0,0,0.5)",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            zIndex: 9999,
-                            padding: 20,
-                        }}
-                    >
-                        <div style={{
-                            background: "white",
-                            borderRadius: 8,
-                            maxWidth: 900,
-                            width: "100%",
-                            maxHeight: "90vh",
-                            overflow: "auto",
-                            padding: 16
-                        }}>
+                {/*{editingProduct && (*/}
+                {/*    // یک modal ساده*/}
+                {/*    <div*/}
+                {/*        style={{*/}
+                {/*            position: "fixed",*/}
+                {/*            inset: 0,*/}
+                {/*            background: "rgba(0,0,0,0.5)",*/}
+                {/*            display: "flex",*/}
+                {/*            alignItems: "center",*/}
+                {/*            justifyContent: "center",*/}
+                {/*            zIndex: 9999,*/}
+                {/*            padding: 20,*/}
+                {/*        }}*/}
+                {/*    >*/}
+                {/*        <div style={{*/}
+                {/*            background: "white",*/}
+                {/*            borderRadius: 8,*/}
+                {/*            maxWidth: 900,*/}
+                {/*            width: "100%",*/}
+                {/*            maxHeight: "90vh",*/}
+                {/*            overflow: "auto",*/}
+                {/*            padding: 16*/}
+                {/*        }}>*/}
 
-                            <Edit
-                                productToEdit={editingProduct}
-                                onClose={handleClose}
-                                onSaved={handleSaved}
-                            />
-                        </div>
-                    </div>
-                )}
+                {/*            <Edit*/}
+                {/*                productToEdit={editingProduct}*/}
+                {/*                onClose={handleClose}*/}
+                {/*                onSaved={() => handleSaved(globalValue)}*/}
+                {/*            />*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*)}*/}
             </div>
         </div>
     );

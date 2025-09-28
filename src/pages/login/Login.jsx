@@ -15,8 +15,8 @@ const Login = () => {
 
         try {
             const response = await fetch(
-                "http://localhost:8080/api/login.php",
-                // `${globalValue}/api/login.php`,
+                // "http://localhost:8080/api/login.php",
+                `${globalValue}/api/login.php`,
                 {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -24,7 +24,6 @@ const Login = () => {
             });
 
             const result = await response.json();
-            console.log("Login result:", result);
 
             if (result.success) {
                 alert("ورود موفق 👌");

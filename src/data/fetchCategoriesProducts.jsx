@@ -8,11 +8,10 @@ import touch from "../assets/touch.jpg";
 // حالا globalValue به عنوان پارامتر گرفته می‌شود
 const fetchCategoriesProducts = async (categoryId) => {
   try {
-    // const response = await fetch(`/api/get_categories_products.php?categoryId=${categoryId}`);
-    const response = await fetch(`http://localhost:8080/api/get_categories_products.php?categoryId=${categoryId}`);
+    const response = await fetch(`/api/get_categories_products.php?categoryId=${categoryId}`);
+    // const response = await fetch(`http://localhost:8080/api/get_categories_products.php?categoryId=${categoryId}`);
     const data = await response.json();
     const productsArray = data.products;
-    console.log("📦 fetchProducts called");
 
     if (!Array.isArray(productsArray)) {
       console.error("خطا: داده‌های دریافت‌شده آرایه نیستند!", data);

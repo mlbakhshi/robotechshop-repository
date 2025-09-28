@@ -3,6 +3,7 @@ import { getCookie } from "../../utility/cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import {useDeviceType} from "../../hook/useDeviceType";
 
 const Product = ({ data, onIncrease, onDecrease, onEdit }) => {
     const userId = getCookie("userId");
@@ -11,19 +12,28 @@ const Product = ({ data, onIncrease, onDecrease, onEdit }) => {
         if (num === null || num === undefined || isNaN(num)) return "";
         return Math.floor(num).toLocaleString("fa-IR");
     };
-
+    const device = useDeviceType();
     return (
-        <div className="product-card" style={{ position: "relative" }}>
-            <div style={{ position: "relative", display: "inline-block" }}>
-                <img src={data.image} alt={data.productName} className="img-product" />
+        <div className={"product-card " + (userId ? "admin-height" : "user-height")} style={{position: "relative"}}>
+            <div style={{position: "relative", display: "inline-block"}}>
+                <img src={data.image} alt={data.productName} className="img-product"/>
             </div>
 
-            <h3 className="mt-3">{data.productName}</h3>
+            <h3 className="mt-3">
+                {(device === "mobile" && data.productName.length > 40) ||
+                (device !== "mobile" && data.productName.length > 20) ? (
+                    <div className="ellipsis-text">
+                        {data.productName}
+                    </div>
+                ) : (
+                    <span>{data.productName}</span>
+                )}
+            </h3>
             {userId && <p>قیمت خرید: {formatNumber(data.buyPrice)} ت</p>}
             {userId && <p>قیمت رسمی: {formatNumber(data.twentyProfitPrice)} ت</p>}
             <p> {formatNumber(data.salePrice)} تومان</p>
 
-            <p style={{ display: "flex", alignItems: "center", gap: "10px", justifyContent: "center" }}>
+            <p style={{display: "flex", alignItems: "center", gap: "10px", justifyContent: "center"}}>
                 {userId && (
                     <button
                         type="button"
@@ -42,7 +52,7 @@ const Product = ({ data, onIncrease, onDecrease, onEdit }) => {
                         }}
                         aria-label="increase"
                     >
-                        <FontAwesomeIcon icon={faPlus} />
+                        <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 )}
 
@@ -66,17 +76,17 @@ const Product = ({ data, onIncrease, onDecrease, onEdit }) => {
                         }}
                         aria-label="decrease"
                     >
-                        <FontAwesomeIcon icon={faMinus} />
+                        <FontAwesomeIcon icon={faMinus}/>
                     </button>
                 )}
             </p>
 
             <p>
-                کد کالا: <span style={{ color: "gray" }}>{(data.StorageId || "").replace(/%/g, "")}</span>
+                کد کالا: <span style={{color: "gray"}}>{(data.StorageId || "").replace(/%/g, "")}</span>
             </p>
 
             {/* دکمه ویرایش */}
-            {userId && <div className="edit-position" >
+            {userId && <div className="edit-position">
                 <button
                     onClick={() => onEdit && onEdit(data)}
                     style={{
@@ -91,7 +101,7 @@ const Product = ({ data, onIncrease, onDecrease, onEdit }) => {
                     }}
                     aria-label="edit-product"
                 >
-                    <FontAwesomeIcon icon={faEdit} style={{ marginLeft: 6 }} />
+                    <FontAwesomeIcon icon={faEdit} style={{marginLeft: 6}}/>
                 </button>
             </div>}
         </div>

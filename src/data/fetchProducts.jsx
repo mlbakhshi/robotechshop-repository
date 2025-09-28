@@ -11,7 +11,6 @@ const fetchProducts = async (globalValue) => {
     const response = await fetch(`${globalValue}/api/get_products.php`);
     const data = await response.json();
     const productsArray = data.products;
-    console.log("📦 fetchProducts called");
 
     if (!Array.isArray(productsArray)) {
       console.error("خطا: داده‌های دریافت‌شده آرایه نیستند!", data);

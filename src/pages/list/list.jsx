@@ -47,13 +47,12 @@ const List = () => {
   const checkExistingProduct = async (productName) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/check_product.php?ProductName=${productName}`
-            // `${globalValue}/api/check_product.php?ProductName=${productName}`
+        // `http://localhost:8080/api/check_product.php?ProductName=${productName}`
+            `${globalValue}/api/check_product.php?ProductName=${productName}`
       );
 
       const data = await response.json();
 
-      // console.log("Product Check Response:", data); // برای دیباگ
 
       if (data.exists) {
         setExistingProduct(data.product);
@@ -101,8 +100,8 @@ const List = () => {
       }
 
       const response = await fetch(
-        "http://localhost:8080/api/save_product.php",
-          // `${globalValue}/api/save_product.php`,
+        // "http://localhost:8080/api/save_product.php",
+          `${globalValue}/api/save_product.php`,
         {
           method: "POST",
           body: formData,
@@ -110,7 +109,6 @@ const List = () => {
       );
 
       const textResponse = await response.text();
-      console.log("Raw response from server:", textResponse);
 
       try {
         const result = JSON.parse(textResponse);
@@ -144,12 +142,12 @@ const List = () => {
         <>
           <ProfitCalculator checkExistingProduct={checkExistingProduct} />
           <Form>
-            <div style={{ marginLeft: "30px", marginRight: "30px" }}>
-              <h2 style={{ marginTop: "25px", marginBottom: "25px", textAlign: "center" }}>
+            <div className="Form-new" >
+              <h2 >
                 فرم کالای جدید
               </h2>
 
-              <div className="d-flex flex-row mb-3" style={{ textAlign: "right" }}>
+              <div className="d-flex flex-row mb-3 text-align">
                 <div className="col-md-4">
                   <label >نام کالا</label>
                   <Field type="text" name="ProductName" placeholder="نام کالا" />
@@ -221,7 +219,7 @@ const List = () => {
               </div>
             </div>
             {existingProduct && (
-              <div style={{ border: "1px solid gray", padding: "10px", marginTop: "10px" }}>
+              <div className="same-product">
                 <h3>⚠️ کالا مشابه پیدا شد:</h3>
                 <p><strong>نام کالا:</strong> {existingProduct.ProductName}</p>
                 <p><strong>قیمت:</strong> {existingProduct.Price} تومان</p>

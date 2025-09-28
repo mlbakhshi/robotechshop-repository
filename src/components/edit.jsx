@@ -68,7 +68,7 @@ const Edit = ({ productToEdit = null, onClose, onSaved }) => {
     });
 
     const handleSubmit = async (values, { setSubmitting }) => {
-        console.log("Submitting...", values); // 🔹 برای debug
+
         try {
             const formData = new FormData();
             if (productToEdit?.id) {
@@ -84,12 +84,15 @@ const Edit = ({ productToEdit = null, onClose, onSaved }) => {
             formData.append("TwentyProfit", values.TwentyProfit);
             formData.append("SalePrice", values.SalePrice);
 
-            // اگر تصویری انتخاب شده باشد، ارسال شود
-            if (values.ProductImg) {
+            // اگر فایل جدید انتخاب شده => append به عنوان فایل
+            if (values.ProductImg instanceof File) {
                 formData.append("ProductImg", values.ProductImg);
+            } else if (typeof values.ProductImg === "string" && values.ProductImg !== "") {
+                // اگر می‌خواهی آدرس/نام فایل قبلی را ارسال کنی (اختیاری)
+                formData.append("ExistingProductImg", values.ProductImg);
             }
-
-            const response = await fetch("http://localhost:8080/api/save_product.php", {
+            // const response = await fetch("http://localhost:8080/api/save_product.php", {
+            const response = await fetch(`api/save_product.php`, {
                 method: "POST",
                 body: formData,
             });
@@ -177,11 +180,11 @@ const Edit = ({ productToEdit = null, onClose, onSaved }) => {
                                 }}
                             />
                             <div style={{marginTop: 10}}>
-                                <button type="button" onClick={onClose} style={{marginRight: 8}}>
+                                <button className="btn btn-secondary ml-1" type="button" onClick={onClose} style={{marginRight: 8}}>
                                     بستن
                                 </button>
 
-                                <button type="submit" style={{backgroundColor: "#28a745", color: "white"}}>
+                                <button className="btn btn-success" type="submit" style={{backgroundColor: "#28a745", color: "white"}}>
                                     ذخیره تغییرات
                                 </button>
                             </div>

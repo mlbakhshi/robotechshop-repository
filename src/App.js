@@ -15,6 +15,7 @@ import CategoryProducts from "./pages/category/CategoryProducts";
 import {useDeviceType} from "./hook/useDeviceType";
 import {useEffect} from "react";
 import ProductDetail from "./pages/product/ProductDetail";
+import {ProductProvider} from "./context/ProductContext";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
     <ShopContextProvider>
     <GlobalProvider>
         <Router>
-
+        <ProductProvider>
           <Nav />
           <Routes>
             <Route path="/shop" element={<Shop />} />
@@ -47,7 +48,7 @@ function App() {
             <Route path="/category/:categoryId" element={<CategoryProducts />} />
             <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
-
+        </ProductProvider>
         </Router>
     </GlobalProvider>
         </ShopContextProvider>

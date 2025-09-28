@@ -15,7 +15,6 @@ export const ShopContextProvider = (props) => {
       else
       return item
    }))
-console.log(cartItems)
     
   };
 

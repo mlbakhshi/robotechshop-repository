@@ -1,0 +1,237 @@
+@import '_base';
+
+@font-face {
+  font-family: 'Yekan';
+  src: url('./assets/fonts/Yekan.ttf') format('truetype'),
+  url('./assets/fonts/Yekan.woff') format('woff'),
+  url('./assets/fonts/Yekan.svg#Yekan') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+  direction: rtl;
+  font-family: 'Yekan', sans-serif !important;
+}
+
+
+.App {
+  text-align: center;
+}
+
+.common-box{
+  margin-left: 84px;
+  margin-right: 84px;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.products{
+  img{
+    width: 140px !important;
+    height: 135px;
+  }
+  .product-card{
+
+    text-decoration: none;
+    color: black;
+    border: 1px solid #d3d6dc;
+    border-radius: 15px;
+    margin: auto;
+    padding: 10px;
+    width: 240px;
+    h3{
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+  .admin-height{
+    height: 400px;
+  }
+  .user-height{
+    height: 315px;
+  }
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* برای دسکتاپ */
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+/* تبلت */
+@media (max-width: 992px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr); /* دو ستون در تبلت */
+  }
+}
+
+/* موبایل */
+@media (max-width: 576px) {
+  .products {
+    grid-template-columns: repeat(1, 1fr); /* یک ستون در موبایل */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.img-product{
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+}
+.edit-product-icon{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.category-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: white;
+  overflow: hidden;
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* لایه مات روی تصویر */
+  backdrop-filter: blur(3px);      /* مات کردن بک‌گراند */
+}
+
+.category-card span {
+  position: relative;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+.header{
+  background-color: rgb(255,229,215);
+  .header-logo{
+    width: 20%;
+    img{
+      width: 100%;
+    }
+  }
+  .header-menu{
+    margin-right: auto;
+  }
+  .nav-search{
+    margin: 0px 1rem;
+    display: flex;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 45%;
+    height: 42px;
+    button{
+      border-bottom-left-radius:10px;
+      border-top-left-radius:10px;
+      background-color: orange;
+      border-color: unset;
+    }
+  }
+}
+
+.edit-position{
+  margin-top: 10px;
+  position: relative;
+  top: -387px;
+  right: 1px;
+  width: 42px;
+}
+.Form-new{
+  margin-left: 30px;
+  margin-right: 30px;
+  h2{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+}
+.same-product{
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.scroll-text {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.scroll-text span {
+  display: inline-block;
+  //padding-right: -48%;         /* شروع از بیرون چپ */
+  animation: marquee-left 8s linear infinite;
+}
+
+@keyframes marquee-left {
+  0%   { transform: translateX(-100%); }  /* بیرون چپ */
+  100% { transform: translateX(100%); }   /* میره بیرون راست */
+}
+
+.ellipsis-text {
+  white-space: nowrap;       /* جلوگیری از رفتن متن به خط بعد */
+  overflow: hidden;          /* مخفی کردن اضافه متن */
+  text-overflow: ellipsis;   /* اضافه متن به شکل ... نمایش داده شود */
+}

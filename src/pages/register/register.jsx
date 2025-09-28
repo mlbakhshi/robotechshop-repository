@@ -19,8 +19,8 @@ const Register = () => {
 
         try {
             const res = await fetch(
-                "http://localhost:8080/api/register.php",
-                // `${globalValue}/api/register.php`,
+                // "http://localhost:8080/api/register.php",
+                `${globalValue}/api/register.php`,
                 {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -49,8 +49,8 @@ const Register = () => {
 
         try {
             const res = await fetch(
-            "http://localhost:8080/api/login.php",
-                // `${globalValue}/api/login.php`,
+            // "http://localhost:8080/api/login.php",
+                `${globalValue}/api/login.php`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
